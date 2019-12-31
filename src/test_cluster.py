@@ -1,8 +1,10 @@
 import unittest
 
 import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import MinMaxScaler
 
-from cluster import Cluster, AutoEncoder
+from cluster import Cluster, AutoEncoder, DEC
 
 
 class TestCluster(unittest.TestCase):
@@ -15,6 +17,13 @@ class TestCluster(unittest.TestCase):
         self.y_test = np.random.randint(0, 10, 100)
         self.assertEqual(self.x_test.shape, (100, 28, 28, 1))
         self.assertEqual(self.y_test.shape, (100,))
+
+        # irisデータ
+        iris = load_iris()
+        self.x_test = iris.data
+        self.y_test = iris.target
+        mms = MinMaxScaler()
+        self.x_test = mms.fit_transform(self.x_test)
         
     def basic_test(self, cluster):
         # fit
@@ -30,18 +39,25 @@ class TestCluster(unittest.TestCase):
         
         # predict
         y_label = cluster.predict(self.x_test)
-        self.assertEqual(y_label.shape, (100,))
+        self.assertEqual(y_label.shape, (150,))
         self.assertEqual(np.min(y_label), 0)
-        self.assertEqual(np.max(y_label), 9)
+        self.assertEqual(np.max(y_label), 2)
         
         
     def test_cluster(self):
-        self.x_test = self.x_test.reshape((len(self.x_test), -1))
-        self.basic_test(Cluster(n_classes=10))
+        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
+        print('k-means')
+        self.basic_test(Cluster(n_classes=3))
         
     def test_autoencoder(self):
-        self.x_test = self.x_test.reshape((len(self.x_test), -1))
-        self.basic_test(AutoEncoder())
+        print('AutoEncoder')
+        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
+        self.basic_test(AutoEncoder(n_classes=3, dims=(4, 500, 500, 2000, 10)))
+
+    def test_dec(self):
+        print('DEC')
+        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
+        self.basic_test(DEC(n_classes=3, dims=(4, 500, 500, 2000, 10), pretrain_epochs=10))
 
         
 if __name__ == '__main__':
