@@ -1,12 +1,28 @@
 import numpy as np
-from tensorflow.keras.datasets import fashion_mnist
+from sklearn.datasets import load_iris
+from sklearn.preprocessing import MinMaxScaler
+from tensorflow.keras.datasets import fashion_mnist, mnist
 
 
-def load():
+def load(dataset='f-mnist'):
     '''
-    Fashion MNISTのtrainデータを読み込む
+    iris, mnist, fashion mnist のデータを読み込む
+    デフォルトはfashion mnist
+    mnist, fashion mnist は255で除算し最大値1に正規化
+    iris は、MinMaxScalerで正規化
     '''
-    (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
-    x_train = np.expand_dims(x_train, axis=-1)
-    x_train = x_train / 255.
-    return x_train, y_train
+    if dataset == 'iris':
+        iris = load_iris()
+        x = iris.data
+        y = iris.target
+        mms = MinMaxScaler()
+        x = mms.fit_transform(x)
+    elif dataset == 'mnist':
+        (x, y), (_, _) = mnist.load_data()
+        x = np.expand_dims(x, axis=-1)
+        x = x / 255.
+    else:
+        (x, y), (_, _) = fashion_mnist.load_data()
+        x = np.expand_dims(x, axis=-1)
+        x = x / 255.
+    return x, y
