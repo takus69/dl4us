@@ -12,15 +12,21 @@ takus
 
 ---
 ## クラスタリング技術
-深層学習を利用したクラスタリング技術は大きく分けて「AutoEncoders based」「Generative Model Based」「Direct Cluster Optimization」の3種類がある。[1]
-
-今回は「AutoEncoders based」のDeep Embedded Clustering(DEC)[2,3]とGenerative Model Based(VaDE)[4,5]を実装し、クラスタリングの精度を比較した。
+Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDeep Embedded Clustering(DEC)[2,3]とGenerative Model Based(VaDE)[4,5]を実装し、クラスタリングの精度を比較した。
 
 またベースラインとして、K-Means[6]とAutoEncoderによる潜在ベクトルをK-Meansでクラスタリングする手法(AE+K-Means)を使用した。
 
 ---
 ## DEC
- AEによる潜在ベクトルをK-Meansでクラスタリングしたクラスタリング中心を事前学習。潜在ベクトルとクラスタ中心の差がt分布に従うと仮定して学習。損失関数はカルバック・ライブラー情報量。正解の分布は、予測値を強化して標準化したもの（式3）
+ 1. AutoEncoderにより事前学習し、潜在ベクトルをK-Meansでクラスタリングしセントロイドを算出
+ 2. 潜在ベクトルとセントロイドの差がt分布に従うと仮定(予測値)
+
+ `\[
+q_ij = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
+\]`
+
+ 3. 正解の分布は予測値を二乗して標準化(正解値)
+ 4. 2と3の分布においてカルバック・ライブラー情報量を最小化するように学習
 
 ---
 ## VaDE
@@ -29,10 +35,11 @@ AEを事前学習し、潜在ベクトルをGaussian Mixture Model(GMM)でクラ
 ---
 ## データと評価指標
 ### データ
-MNISTとFashion MNISTを使用[7]
+- MNISTとFashion MNIST[7]を使用
+- train, test両方使いデータ件数は70,000
 
 ### 評価指標
-以下の3指標[1]。10回実行した結果の中央値を使用
+- 以下の3指標[1]を使用。10回実行した結果の中央値
 1. Unsupervised Clustering Accuracy (ACC)
 2. Normalized Mutual Information (NMI)
 3. Adjusted Rand Index (ARI)
@@ -47,7 +54,7 @@ MNISTとFashion MNISTを使用[7]
 |VaDE|||
 
 ---
-### 結果(Fashion MNIST)
+## 結果(Fashion MNIST)
 |モデル|ACC|NMI|ARI|
 |---|---|---|---|
 |K-Means|0.47|0.51|0.35|
