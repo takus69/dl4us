@@ -21,14 +21,9 @@ Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDe
  1. AutoEncoderにより事前学習し、潜在ベクトルをK-Meansでクラスタリングしセントロイドを算出
  2. 潜在ベクトルとセントロイドの差がt分布に従うと仮定(予測値)
 
-\tiny
-
- \begin{equation}
-q_{ij} = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
-\end{equation}
-
-)
-
+ `\[\tiny
+q_ij = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
+\]`
  3. 正解の分布は予測値を二乗して標準化(正解値)
  4. 2と3の分布においてカルバック・ライブラー情報量を最小化するように学習
 
