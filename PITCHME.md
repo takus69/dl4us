@@ -1,4 +1,7 @@
-## 深層学習を利用したクラスタリング技術
+## 深層学習を利用した
+## クラスタリング技術
+
+
 DL4US最終課題
 
 takus
@@ -6,13 +9,21 @@ takus
 ---
 ## 動機
 
-機械学習においてデータのアノテーションは時間と手間がかかる。
+深層学習の成功に伴い、AIというキーワードで機械学習とデータを活用できないかという機運が高まっている。
+しかし、データを集めて活用しようと思っても、アノテーションに時間と手間がかかるという困難がある。
+特に深層学習になると必要なデータ量が多く、アノテーションにかかる時間と手間は膨大なものであり、学習の段階まで行けないこともままあるように思われる。
+
 そこで効率的にアノテーションを行うため、深層学習を利用したクラスタリング技術の調査・比較を行う。
 従来からあるクラスタリング技術に加えて、深層学習を利用することで、どの程度精度向上が見込めるのかを確認する。
 
 ---
 ## クラスタリング技術
-Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDeep Embedded Clustering(DEC)[2,3]とGenerative Model Based(VaDE)[4,5]を実装し、クラスタリングの精度を比較した。
+深層学習を利用したクラスタリング技術は大きく分けて「AutoEncoders based」「Generative Model Based」「Direct Cluster Optimization」の3種類がある。[1]
+
+今回は
+- 「AutoEncoders based」のDeep Embedded Clustering(DEC)[2,3]
+- 「Generative Model Based」のVariational Deep Embedding(VaDE)[4,5]
+の2つの技術を実装し、クラスタリングの精度を比較した。
 
 またベースラインとして、K-Means[6]とAutoEncoderによる潜在ベクトルをK-Meansでクラスタリングする手法(AE+K-Means)を使用した。
 
