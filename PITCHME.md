@@ -1,10 +1,10 @@
-### 深層学習を利用したクラスタリング技術
+# 深層学習を利用したクラスタリング技術
 DL4US最終課題
 
 takus
 
 ---
-### 動機
+## 動機
 
 深層学習の成功に伴い、AIというキーワードで機械学習とデータを活用できないかという機運が高まっている。
 しかし、データを集めて活用しようと思っても、アノテーションに時間と手間がかかるという困難がある。
@@ -14,7 +14,7 @@ takus
 従来からあるクラスタリング技術に加えて、深層学習を利用することで、どの程度精度向上が見込めるのか、実用できるレベルなのかを確認する。
 
 ---
-### クラスタリング技術
+## クラスタリング技術
 深層学習を利用したクラスタリング技術は大きく分けて「AutoEncoders based」「Generative Model Based」「Direct Cluster Optimization」の3種類がある。[1]
 
 - AutoEncoders(AE) based: AEにより次元圧縮された表現ベクトルからクラスタリングを行う
@@ -28,10 +28,10 @@ takus
 またベースラインとして、K-Means[6]を使用する。
 
 ---
-### 個別技術の詳細1, 2, 3...
+## 個別技術の詳細1, 2, 3...
 
 ---
-### データと評価指標
+## データと評価指標
 データはKerasで使用できるMNISTとFashion MNISTを使用する。[7]
 
 評価指標は以下の3つとし、10回実行した結果の中央値を使用する。[1]
@@ -40,9 +40,9 @@ takus
 3. Adjusted Rand Index (ARI)
 
 ---
-### 実験結果
+## 実験結果
 
-#### MNIST
+### MNIST
 |モデル|ACC|NMI|ARI|
 |---|---|---|---|
 |K-Means||||
@@ -50,7 +50,7 @@ takus
 |DEC||||
 |VaDE|||
 
-#### Fashion MNIST
+### Fashion MNIST
 |モデル|ACC|NMI|ARI|
 |---|---|---|---|
 |K-Means|0.47|0.51|0.35|
@@ -59,10 +59,10 @@ takus
 |VaDE|0.59|0.59|0.45|
 
 ---
-### まとめ
+## まとめ
 
 ---
-### 参考文献
+## 参考文献
 1. Deep Clustring: https://deepnotes.io/deep-clustering
 2. DEC(論文): http://proceedings.mlr.press/v48/xieb16.pdf
 3. DEC(コード): https://github.com/XifengGuo/DEC-keras/blob/master/run_exp.py
