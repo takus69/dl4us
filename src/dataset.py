@@ -18,11 +18,15 @@ def load(dataset='f-mnist'):
         mms = MinMaxScaler()
         x = mms.fit_transform(x)
     elif dataset == 'mnist':
-        (x, y), (_, _) = mnist.load_data()
+        (x, y), (x2, y2) = mnist.load_data()
+        x = np.concatenate([x, x2], axis=0)
+        y = np.concatenate([y, y2], axis=0)
         x = np.expand_dims(x, axis=-1)
         x = x / 255.
     else:
-        (x, y), (_, _) = fashion_mnist.load_data()
+        (x, y), (x2, y2) = fashion_mnist.load_data()
+        x = np.concatenate([x, x2], axis=0)
+        y = np.concatenate([y, y2], axis=0)
         x = np.expand_dims(x, axis=-1)
         x = x / 255.
     return x, y

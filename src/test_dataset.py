@@ -7,8 +7,8 @@ import dataset
 class TestDataset(unittest.TestCase):
     def test_load(self):
         x, y = dataset.load()
-        self.assertEqual(x.shape, (60000, 28, 28, 1))
-        self.assertEqual(y.shape, (60000,))
+        self.assertEqual(x.shape, (70000, 28, 28, 1))
+        self.assertEqual(y.shape, (70000,))
         self.assertEqual(np.min(x), 0)
         self.assertEqual(np.max(x), 1)
         self.assertEqual(np.min(y), 0)
@@ -25,8 +25,8 @@ class TestDataset(unittest.TestCase):
 
     def test_mnist(self):
         x, y = dataset.load('mnist')
-        self.assertEqual(x.shape, (60000, 28, 28, 1))
-        self.assertEqual(y.shape, (60000,))
+        self.assertEqual(x.shape, (70000, 28, 28, 1))
+        self.assertEqual(y.shape, (70000,))
         self.assertEqual(np.min(x), 0)
         self.assertEqual(np.max(x), 1)
         self.assertEqual(np.min(y), 0)
@@ -34,8 +34,8 @@ class TestDataset(unittest.TestCase):
 
     def test_fmnist(self):
         x, y = dataset.load('f-mnist')
-        self.assertEqual(x.shape, (60000, 28, 28, 1))
-        self.assertEqual(y.shape, (60000,))
+        self.assertEqual(x.shape, (70000, 28, 28, 1))
+        self.assertEqual(y.shape, (70000,))
         self.assertEqual(np.min(x), 0)
         self.assertEqual(np.max(x), 1)
         self.assertEqual(np.min(y), 0)
