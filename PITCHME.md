@@ -21,11 +21,11 @@ Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDe
  1. AutoEncoderにより事前学習し、潜在ベクトルをK-Meansでクラスタリングしセントロイドを算出
  2. 潜在ベクトルとセントロイドの差がt分布に従うと仮定(予測値)
 
-@size[0.5em](
-    
- `\[
+\tiny
+
+ \begin{equation}
 q_{ij} = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
-\]`
+\end{equation}
 
 )
 
