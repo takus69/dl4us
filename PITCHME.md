@@ -18,15 +18,17 @@ Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDe
 
 ---
 ## DEC
- 1. @size[0.8em](AutoEncoderにより事前学習し、潜在ベクトルをK-Meansでクラスタリングしセントロイドを算出)
- 2. @size[0.8em](潜在ベクトル`\(z_i\)`とセントロイド`\(\mu_j\)`の差が自由度1のt分布に従うと仮定(予測値))
+@snap[west text-08]
+
+ 1. AutoEncoderにより事前学習し、潜在ベクトルをK-Meansでクラスタリングしセントロイドを算出
+ 2. (潜在ベクトル`\(z_i\)`とセントロイド`\(\mu_j\)`の差が自由度1のt分布に従うと仮定(予測値)
 
  `\[
      \tiny
     q_{ij} = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
 \]`
 
- 3. @size[0.8em](正解の分布は予測値を二乗して標準化(正解値))
+ 3. (正解の分布は予測値を二乗して標準化(正解値)
 
 `\[
     \tiny
@@ -38,7 +40,9 @@ Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDe
     f_j = \sum_i q_{ij}
 \]`
 
- 1. @size[0.8em](2と3の分布においてカルバック・ライブラー情報量を最小化するように学習)
+ 4. 2と3の分布においてカルバック・ライブラー情報量を最小化するように学習
+
+@snapend
 
 ---
 ## VaDE
