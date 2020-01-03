@@ -25,13 +25,13 @@ Deep Clustering[1]の記事を参考に、今回は「AutoEncoders based」のDe
 q_{ij} = \frac{ \left( 1 + |z_i - \mu_j|^2 \right)^{-1}}{ \sum_{j'} \left( 1 + |z_i - \mu_{j'}|^2 \right)^{-1}}
 \]`
 
- 3. 正解の分布は予測値を二乗して標準化(正解値)`\(f_j = \sum_i q_{ij}}\)`
+ 3. 正解の分布は予測値を二乗して標準化(正解値)`\(f_j = \sum_i q_{ij}\)`
 
-`\begin{equation}\tiny
-q_{ij} = \frac{ \frac{q_{ij}^2}{f_j} }{ \sum_{j'} \frac{q_{ij'}^2}{f_j'}}
-\end{equation}`
+`\[\tiny
+p_{ij} = \frac{ \frac{q_{ij}^2}{f_j} }{ \sum_{j'} \frac{q_{ij'}^2}{f_j'}}
+\]`
 
- 4. 2と3の分布においてカルバック・ライブラー情報量を最小化するように学習
+ 1. 2と3の分布においてカルバック・ライブラー情報量を最小化するように学習
 
 ---
 ## VaDE
