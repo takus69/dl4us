@@ -5,6 +5,7 @@ from sklearn.datasets import load_iris
 from sklearn.preprocessing import MinMaxScaler
 
 from cluster import Cluster, AutoEncoder, DEC
+from vade import VaDE
 
 
 class TestCluster(unittest.TestCase):
@@ -22,6 +23,8 @@ class TestCluster(unittest.TestCase):
         iris = load_iris()
         self.x_test = iris.data
         self.y_test = iris.target
+        self.assertEqual(self.x_test.shape, (150, 4))
+        self.assertEqual(self.y_test.shape, (150,))
         mms = MinMaxScaler()
         self.x_test = mms.fit_transform(self.x_test)
         
@@ -58,6 +61,13 @@ class TestCluster(unittest.TestCase):
         print('DEC')
         # self.x_test = self.x_test.reshape((len(self.x_test), -1))
         self.basic_test(DEC(n_classes=3, dims=(4, 500, 500, 2000, 10), pretrain_epochs=10))
+    
+    def test_vade(self):
+        print('VaDE')
+        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
+        self.basic_test(VaDE(
+            n_clusters=3, hidden_dim=[100, 100, 500], input_dim=4, latent_dim=3,
+            batch_size=30, init='glorot_uniform'))
 
         
 if __name__ == '__main__':
