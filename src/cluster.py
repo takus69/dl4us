@@ -3,8 +3,6 @@ from sklearn.cluster import KMeans
 from time import time
 from tensorflow.keras.layers import Input, Dense, Layer
 from tensorflow.keras.models import Model
-from tensorflow.keras.optimizers import SGD
-from tensorflow.keras.initializers import VarianceScaling
 import tensorflow.keras.backend as K
 
 from metrics import show_score
@@ -61,17 +59,14 @@ class AutoEncoder(Cluster):
         encoder_x = encoder_input
         for dim in self.dims[1:-1]:
             encoder_x = Dense(dim, activation='relu')(encoder_x)
-        # encoder_x = Dense(500, activation='relu')(encoder_input)
-        # encoder_x = Dense(500, activation='relu')(encoder_x)
-        # encoder_x = Dense(2000, activation='relu')(encoder_x)
         encoder_x = Dense(hid_dim)(encoder_x)
         encoder_model = Model(encoder_input, encoder_x)
 
         # decoder
         decoder_input = Input(shape=(hid_dim,))
-        decoder_x = Dense(2000, activation='relu')(decoder_input)
-        decoder_x = Dense(500, activation='relu')(decoder_x)
-        decoder_x = Dense(500, activation='relu')(decoder_x)
+        decoder_x = decoder_input
+        for dim in reversed(self.dims[1:-1]):
+            decoder_x = Dense(dim, activation='relu')(decoder_x)
         decoder_x = Dense(img_dim, activation='sigmoid')(decoder_x)
         decoder_model = Model(decoder_input, decoder_x)
 

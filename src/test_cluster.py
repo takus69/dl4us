@@ -12,15 +12,8 @@ from vade import VaDE
 class TestCluster(unittest.TestCase):
     def setUp(self):
         '''
-        テストデータとして(100, 10)のテストデータを作成
+        テストデータとして(150, 4)のirisデータを使用
         '''
-        self.x_test = [np.expand_dims(np.random.rand(28, 28), axis=-1) for _ in range(100)]
-        self.x_test = np.array(self.x_test)
-        self.y_test = np.random.randint(0, 10, 100)
-        self.assertEqual(self.x_test.shape, (100, 28, 28, 1))
-        self.assertEqual(self.y_test.shape, (100,))
-
-        # irisデータ
         iris = load_iris()
         self.x_test = iris.data
         self.y_test = iris.target
@@ -49,23 +42,19 @@ class TestCluster(unittest.TestCase):
         
         
     def test_cluster(self):
-        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
         print('k-means')
         self.basic_test(Cluster(n_classes=3))
         
     def test_autoencoder(self):
         print('AutoEncoder')
-        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
         self.basic_test(AutoEncoder(n_classes=3, dims=(4, 500, 500, 2000, 10)))
 
     def test_dec(self):
         print('DEC')
-        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
         self.basic_test(DEC(n_classes=3, dims=(4, 500, 500, 2000, 10), pretrain_epochs=10))
     
     def test_vade(self):
         print('VaDE')
-        # self.x_test = self.x_test.reshape((len(self.x_test), -1))
         self.basic_test(VaDE(
             n_clusters=3, hidden_dim=[100, 100, 500], input_dim=4, latent_dim=3,
             batch_size=30, init='glorot_uniform'))
