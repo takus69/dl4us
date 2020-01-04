@@ -1,5 +1,5 @@
 import numpy as np
-from tensorflow.keras.callbacks import Callback, ProgbarLogger, LearningRateScheduler
+from tensorflow.keras.callbacks import Callback, LearningRateScheduler
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.layers import Input, Dense, Lambda, Layer
 from tensorflow.keras.models import Model
@@ -7,14 +7,9 @@ from tensorflow.keras import backend as K
 from tensorflow.keras import losses
 from tensorflow.keras.initializers import VarianceScaling, RandomUniform
 from tensorflow.keras.optimizers import SGD
-import scipy.io as scio
-import gzip
-from six.moves import cPickle
-import sys
 import math
 from sklearn import mixture
 from sklearn.cluster import KMeans
-from tensorflow.keras.models import model_from_json
 from time import time
 
 from cluster import Cluster
