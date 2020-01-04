@@ -4,7 +4,8 @@ import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.preprocessing import MinMaxScaler
 
-from cluster import Cluster, AutoEncoder, DEC
+from cluster import Cluster, AutoEncoder
+from dec import DEC
 from vade import VaDE
 
 
